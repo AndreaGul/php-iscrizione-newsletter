@@ -1,3 +1,19 @@
+<?php
+function isEmail($email)
+{
+  $chars = str_split($email);
+
+  foreach ($chars as $char) {
+    if ($char === '.') {
+      return true;
+    };
+  };
+};
+
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,24 +27,37 @@
 </head>
 
 <body>
-  <div  class="container">
+  <div class="container">
     <h1>
-      Iscrizione Newsletter
+      Iscriviti alla Newsletter
     </h1>
-  <form action="index.php" method="GET">
-      
+    <form action="index.php" method="GET">
+
       <div class=" mb-3">
-        <label for="email" class="form-label">Email address</label>
+        <label for="email" class="form-label">Inserisci email</label>
         <div class="input-group mb-3">
-          <input type="email" class="form-control" id="email"  name="email" placeholder="name@example.com">
-        <button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>
+          <input type="email" class="form-control" id="email" name="email" placeholder="nome@esempio.com">
+          <button class="btn btn-outline-secondary">Invia</button>
         </div>
       </div>
-  </form>
+      <?php
+      if (!empty($_GET['email'])) : ?>
+        <?php
+        $email = $_GET['email'];
+        ?>
+        <?php if (isEmail($email)) : ?>
+          <div class="alert alert-success" role="alert">
+            Email valida
+          </div>
+        <?php else : ?>
+          <div class="alert alert-warning" role="alert">
+            Email non valida
+          </div>
+        <?php endif; ?>
+      <?php endif; ?>
+    </form>
   </div>
-    <?php
-  echo $email = $_GET['email']
-  ?>
+
 </body>
 
 </html>
