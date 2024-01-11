@@ -1,5 +1,25 @@
 <?php
 include __DIR__ . '/functions.php';
+
+$error = NULL;
+$email = '';
+
+
+if (!empty($_GET['email'])) {
+
+  $email = $_GET['email'];
+  
+  if (isEmail($email)) {
+      $error = true;
+  }
+  else {
+    $error=false;
+  };
+}
+       
+         
+       
+
 ?>
 
 
@@ -25,25 +45,21 @@ include __DIR__ . '/functions.php';
       <div class=" mb-3">
         <label for="email" class="form-label">Inserisci email</label>
         <div class="input-group mb-3">
-          <input type="email" class="form-control" id="email" name="email" placeholder="nome@esempio.com">
+          <input type="email" class="form-control" id="email" name="email"  value="<?php echo $email ?>">
           <button class="btn btn-outline-secondary">Invia</button>
         </div>
       </div>
-      <?php
-      if (!empty($_GET['email'])) : ?>
-        <?php
-        $email = $_GET['email'];
-        ?>
-        <?php if (isEmail($email)) : ?>
+     
+        <?php if ($error === true) : ?>
           <div class="alert alert-success" role="alert">
             Email valida
           </div>
-        <?php else : ?>
+        <?php elseif($error === false) : ?>
           <div class="alert alert-warning" role="alert">
             Email non valida
           </div>
         <?php endif; ?>
-      <?php endif; ?>
+      
     </form>
   </div>
 
