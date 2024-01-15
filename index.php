@@ -1,6 +1,8 @@
 <?php
 include __DIR__ . '/functions.php';
 
+session_start();
+
 $error = NULL;
 $error_class = NULL;
 $error_text = NULL;
@@ -14,9 +16,16 @@ if (!empty($_GET['email'])) {
   $email = $_GET['email'];
   
   if (isEmail($email)) {
-      $error = true;
-      $error_class = "success";
-      $error_text = "Email valida";
+    //milestone 3
+          // $error = true;
+          // $error_class = "success";
+          // $error_text = "Email valida";
+
+
+    //milestone 4
+    $_SESSION['email']=$email;
+    header('Location: thankyou.php');
+    die;
   }
   else {
     $error=false;
