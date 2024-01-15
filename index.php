@@ -2,7 +2,11 @@
 include __DIR__ . '/functions.php';
 
 $error = NULL;
+$error_class = NULL;
+$error_text = NULL;
+
 $email = '';
+
 
 
 if (!empty($_GET['email'])) {
@@ -11,9 +15,13 @@ if (!empty($_GET['email'])) {
   
   if (isEmail($email)) {
       $error = true;
+      $error_class = "success";
+      $error_text = "Email valida";
   }
   else {
     $error=false;
+    $error_class = "warning";
+    $error_text = "Email non valida";
   };
 }
        
@@ -50,16 +58,16 @@ if (!empty($_GET['email'])) {
         </div>
       </div>
      
-        <?php if ($error === true) : ?>
-          <div class="alert alert-success" role="alert">
-            Email valida
+        
+      
+          <?php if ($error !== NUll) : ?>
+          <div class="alert alert-<?php echo $error_class ?>" role="alert">
+            <?php echo $error_text ?>
           </div>
-        <?php elseif($error === false) : ?>
-          <div class="alert alert-warning" role="alert">
-            Email non valida
-          </div>
+
         <?php endif; ?>
       
+
     </form>
   </div>
 
